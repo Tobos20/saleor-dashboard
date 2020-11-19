@@ -84,7 +84,7 @@ export interface OrderDetailsPageProps extends UserPermissionProps {
 const OrderDetailsPage: React.FC<OrderDetailsPageProps> = props => {
   const {
     disabled,
-    order,
+    order: lol,
     saveButtonBarState,
     userPermissions,
     onBack,
@@ -114,6 +114,7 @@ const OrderDetailsPage: React.FC<OrderDetailsPageProps> = props => {
     makeChangeHandler: makeMetadataChangeHandler
   } = useMetadataChangeTrigger();
 
+  const order = lol ? { ...lol, status: OrderStatus.UNCONFIRMED } : undefined;
   const canCancel = maybe(() => order.status) !== OrderStatus.CANCELED;
   const canEditAddresses = maybe(() => order.status) !== OrderStatus.CANCELED;
   const canFulfill = maybe(() => order.status) !== OrderStatus.CANCELED;
